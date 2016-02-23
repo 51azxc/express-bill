@@ -1,0 +1,62 @@
+<div layout="column">
+  <div layout="column" layout-align="start start" flex>
+    <md-fab-speed-dial md-open="false" md-direction="right" ng-class="md-fling" layout-align="start start">
+      <md-fab-trigger>
+        <md-button class="md-fab md-warn" aria-label="menu">
+          <md-icon md-svg-src="images/icons/menu.svg"></md-icon>
+        </md-button>
+      </md-fab-trigger>
+      <md-fab-actions>
+        <md-button class="md-fab md-raised md-mini md-warn" ng-href="/createBill">
+          <md-tooltip>
+            add a bill
+          </md-tooltip>
+          <md-icon md-svg-src="images/icons/pencil.svg"></md-icon>
+        </md-button>
+      </md-fab-actions>
+    </md-fab-speed-dial>
+  </div>
+  
+  <div layout="row" layout-sm="column" layout-align="space-around center" flex ng-hide="loaded">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+  </div>
+
+  <!-- <div flex class="md-padding">
+    <div layout-margin class="inset">
+      <md-list ng-if="week.length">
+        <div ng-repeat="day in week">
+          <md-subheader class="md-no-sticky">{{ day.dateStr }}</md-subheader>
+          <md-list-item class="md-3-line" ng-repeat="bill in day.bills">
+            <div class="md-list-item-text" layout="column">
+              <h3>{{ bill.name }}</h3>
+              <h4>{{ bill.price }}</h4>
+              <h4>{{ bill.date }}</h4>
+            </div>
+          </md-list-item>
+          <md-divider ng-if="!$last"></md-divider>
+        </div>
+      </md-list>
+      <div ng-if="!week.length">Nothing</div>
+    </div>
+  </div> -->
+
+  <md-content>
+    <md-list>
+      <md-subheader class="md-no-sticky">{{ today }}</md-subheader>
+      <md-list-item class="md-3-line" ng-repeat="bill in bills" ng-click="editBill(bill._id)">
+        <md-icon md-svg-icon="images/icons/hanger.svg" ng-if="bill.tag == 1"></md-icon>
+        <md-icon md-svg-icon="images/icons/food.svg" ng-if="bill.tag == 2"></md-icon>
+        <md-icon md-svg-icon="images/icons/hotel.svg" ng-if="bill.tag == 3"></md-icon>
+        <md-icon md-svg-icon="images/icons/bus.svg" ng-if="bill.tag == 4"></md-icon>
+        <md-icon md-svg-icon="images/icons/cart.svg" ng-if="bill.tag == 5"></md-icon>
+        <div class="md-list-item-text" layout="column">
+          <h3>{{ bill.name }}</h3>
+          <h4>{{ bill.price | currency:'￥' }}</h4>
+          <p>{{ bill.detail }}</p>
+        </div>
+        <md-icon md-svg-icon="images/icons/pencil.svg" class="md-secondary md-hue-3"></md-icon>
+      </md-list-item>
+    </md-list>
+  </md-content>
+
+</div>

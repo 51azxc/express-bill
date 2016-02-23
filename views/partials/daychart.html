@@ -1,0 +1,121 @@
+<div layout="column">
+<!--
+   <div layout="row" layout-sm="column" layout-align="space-around center" flex ng-hide="loaded">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+  </div>
+
+  <md-fab-toolbar md-direction="right">
+    <md-fab-trigger class="align-with-text">
+      <md-button class="md-fab md-primary" aria-label="menu">
+        <md-icon md-svg-src="images/icons/menu.svg"></md-icon>
+      </md-button>
+    </md-fab-trigger>
+    <md-toolbar>
+      <md-fab-actions class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="line chart" ng-click="showLine()">
+          <md-icon md-svg-src="images/icons/chart-line.svg"></md-icon>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="bar chart" ng-click="showBar()">
+          <md-icon md-svg-src="images/icons/chart-bar.svg"></md-icon>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="pie chart" ng-click="showPie()">
+          <md-icon md-svg-src="images/icons/chart-pie.svg"></md-icon>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="doughnut chart" ng-click="showDoughnut()">
+          <md-icon md-svg-src="images/icons/chart-arc.svg"></md-icon>
+        </md-button>
+      </md-fab-actions>
+    </md-toolbar>
+  </md-fab-toolbar>
+-->
+  
+  <md-content class="md-padding" layout="row" layout-xs="column" flex>
+    <div layout="column" flex-gt-xs="50" flex-xs>
+      <div layout="row" layout-align="space-around center" flex ng-hide="lineLoaded">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+      </div>
+      <md-card ng-show="lineLoaded">
+        <md-card-header>
+          <md-card-avatar>
+            <md-icon md-svg-src="images/icons/chart-line.svg"></md-icon>
+          </md-card-avatar>
+          <md-card-header-text>
+            <span class="md-headline">Week</span>
+            <!-- <span class="md-subhead">line chart</span> -->
+          </md-card-header-text>
+        </md-card-header>
+        <md-card-content>
+          <canvas id="line" class="chart chart-line" chart-data="lineData" chart-labels="lineLabels" chart-series="lineSeries" chart-legend="lineLegend" chart-click="lineOnClick"></canvas>
+        </md-card-content>
+      </md-card>
+      <md-card>
+        <md-card-header>
+          <md-card-avatar>
+            <md-icon md-svg-src="images/icons/chart-bar.svg"></md-icon>
+          </md-card-avatar>
+          <md-card-header-text>
+            <span class="md-headline">Month</span>
+          </md-card-header-text>
+        </md-card-header>
+        <md-card-content>
+          <canvas id="bar" class="chart chart-bar" chart-data="barData" chart-labels="barLabels" chart-series="barSeries" chart-legend="barLegend"></canvas>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div layout="column" flex-gt-xs="50" flex-xs>
+      <md-card>
+        <md-card-header>
+          <md-card-avatar>
+            <md-icon md-svg-src="images/icons/chart-arc.svg"></md-icon>
+          </md-card-avatar>
+          <md-card-header-text>
+            <span class="md-headline">Type</span>
+          </md-card-header-text>
+        </md-card-header>
+        <md-card-content>
+          <canvas id="doughnut" class="chart chart-doughnut" chart-data="doughnutData" chart-labels="doughnutLabels" chart-legend="doughnutLegend"></canvas>
+        </md-card-content>
+      </md-card>
+      <md-card>
+        <md-card-header>
+          <md-card-avatar>
+            <md-icon md-svg-src="images/icons/chart-pie.svg"></md-icon>
+          </md-card-avatar>
+          <md-card-header-text>
+            <span class="md-headline">Top Type</span>
+          </md-card-header-text>
+        </md-card-header>
+        <md-card-content>
+          <canvas id="base" class="chart-base" chart-type="dynamicType" chart-data="dynamicData" chart-labels="dynamicLabels" chart-legend="true"></canvas>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end start">
+          <md-button ng-click="toggle()">toggle</md-button>
+        </md-card-actions>
+      </md-card>
+    </div>
+<!--
+    <section layout="row" layout-sm="column" layout-align="center center" flex ng-show="showLine">
+      <canvas id="line" class="chart chart-line" chart-data="lineData" chart-labels="lineLabels" chart-legend="true" chart-series="lineSeries" chart-click="lineOnClick"></canvas>
+    </section>
+    <section layout="row" layout-sm="column" layout-align="center center" flex ng-show="showBar">
+      <canvas id="bar" class="chart chart-bar" chart-data="barData" chart-labels="barLabels" chart-series="barSeries"></canvas>
+    </section>
+    <section layout="row" layout-sm="column" layout-align="center center" flex ng-show="showDoughnut">
+      <canvas id="doughnut" class="chart chart-doughnut" chart-data="doughnutData" chart-labels="doughnutLabels"></canvas>
+    </section>
+    <section layout="row" layout-sm="column" layout-align="center center" flex ng-show="showPie">
+      <canvas id="pie" class="chart chart-pie" chart-data="pieData" chart-labels="pieLabels"></canvas>
+    </section>
+    <section layout="row" layout-sm="column" layout-align="center center" flex ng-show="showPolarArea">
+      <canvas id="polar-area" class="chart chart-polar-area" chart-data="polarAreaData" chart-labels="polarAreaLabels"></canvas>
+    </section>
+    <section layout="row" layout-sm="column" layout-align="center center" flex ng-show="showRadar">
+      <canvas id="radar" class="chart chart-radar" chart-data="radarData" chart-labels="radarLabels"></canvas>
+    </section>
+    <section layout="row" layout-sm="column" layout-align="center center" flex ng-show="showDynamicChart">
+      <canvas id="base" class="chart-base" chart-type="dynamicType" chart-data="dynamicData" chart-labels="dynamicLabels" chart-legend="true"></canvas>
+      <md-button ng-click="toggle()">Toggle</md-button>
+    </section>
+-->
+  </md-content>
+</div>

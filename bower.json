@@ -1,0 +1,30 @@
+{
+  "name": "express-bill",
+  "version": "0.0.0",
+  "authors": [
+    "51azxc <hhj0862@outlook.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "^1.0.4",
+    "domReady": "~2.0.1",
+    "requirejs": "~2.1.20",
+    "angular-route": "~1.4.7",
+    "angular-messages": "~1.4.7",
+    "ng-file-upload": "~10.0.2",
+    "angular-chart.js": "^0.8.8"
+  }
+}

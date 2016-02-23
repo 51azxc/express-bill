@@ -1,0 +1,108 @@
+<md-progress-linear md-mode="indeterminate" ng-show="loading"></md-progress-linear>
+<md-button class="md-icon-button" aria-label="back" go-back>
+  <md-tooltip>back</md-tooltip>
+  <md-icon md-svg-src="images/icons/arrow-left.svg"></md-icon>
+</md-button>
+<div flex class="md-padding" ng-cloak id="billFormDiv">
+  <div layout-margin class="inset">
+    <md-content layout-padding flex>
+      <div>
+        <form name="billForm" novalidate>
+          <input type="hidden" ng-model="bill._id" name="id">
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>名目</label>
+              <input type="text" ng-model="bill.name" name="name" required>
+              <div ng-messages="billForm.name.$dirty && billForm.name.$error">
+                <div ng-message="required">This is required.</div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>消费</label>
+              <input type="number" ng-model="bill.price" name="price" min="0.01" max="1000000" step="any" required>
+              <div ng-messages="billForm.price.$dirty && billForm.price.$error" multiple>
+                <div ng-message="required">请输入消费金额</div>
+                <div ng-message="min">花费太少</div>
+                <div ng-message="max">消费过高</div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>分类</label>
+              <md-select ng-model="bill.tag" name="tag" aria-label="tag" required>
+                <md-option value="1">衣</md-option>
+                <md-option value="2">食</md-option>
+                <md-option value="3">住</md-option>
+                <md-option value="4">行</md-option>
+                <md-option value="5">杂</md-option>
+              </md-select>
+              <div ng-messages="billForm.tag.$dirty && billForm.tag.$error">
+                <div ng-message="required">This is required.</div>
+              </div>
+            </md-input-container>
+          </div>
+          <div layout-gt-xs="row">
+            <div style="margin-top: 15px;">
+              <md-datepicker ng-model="bill.costDate" md-placeholder="Enter date" md-min-date="minDate" md-max-date="maxDate" name="costDate" aria-label="cost date" required></md-datepicker>
+              <div ng-messages="billForm.costDate.$dirty && billForm.costDate.$error">
+                <div ng-message="required">This date is required!</div>
+                <div ng-message="mindate">This date is too early!</div>
+                <div ng-message="maxdate">This date is too late!</div>
+              </div>
+            </div>
+            <md-input-container class="md-block" flex-gt-xs>
+              <label>说明</label>
+              <textarea ng-model="bill.detail" columns="3" md-maxlength="150"></textarea>
+            </md-input-container>
+          </div>
+
+          <div layout-gt-xs="row">
+            <md-input-container class="md-block" flex-gt-xs>
+              <div ngf-drop ngf-select ng-model="files" class="drop-box" ngf-drag-over-class="'dragover'" ngf-allow-dir="true" ngf-multiple="true" accept="image/*" ngf-pattern="'image/*,!.gif'" ngf-max-size="20MB">
+                <div ng-show="files">
+                  <ul>
+                    <li ng-repeat="file in files">{{ file.name | limitTo:10 }}</li>
+                  </ul>
+                </div>
+                <div ng-hide="files">Drop images here or click to upload</div>
+              </div>
+              <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+            </md-input-container>
+          </div>
+          <md-divider></md-divider>
+          <div layout-gt-xs="row" ng-if="images.length">
+            <md-list flex>
+              <md-subheader class="md-no-sticky">Bill Image</md-subheader>
+              <md-list-item layout="row" ng-repeat="image in images">
+                <md-checkbox ng-model="image.selected"></md-checkbox>
+                <img ng-src="{{image.url}}" class="img" />
+                <md-icon class="md-secondary" md-svg-icon="images/icons/magnify-plus.svg" aria-label="Show Image" ng-click="manifyPlus(image.url, $event)"></md-icon>
+              </md-list-item>
+            </md-list>
+          </div>
+          <div layout-gt-xs="row" layout-align="end center">
+            <md-button flex type="button" class="md-raised md-primary" ng-disabled="billForm.$invalid || disabled" ng-click="addBill()" ng-hide="bill._id">创建</md-button>
+            <md-button flex type="button" class="md-raised md-primary" ng-disabled="billForm.$invalid || disabled" ng-click="editBill()" ng-show="bill._id">编辑</md-button>
+            <md-button flex type="button" class="md-raised md-warn" ng-disabled="disabled" ng-click="deleteBill()" ng-show="bill._id">删除</md-button>
+          </div>
+        </form>
+      </div>
+    </md-content>
+  </div>
+</div>
+
+<script type="text/ng-template" id="showImg.html">
+  <md-dialog aria-label="Show Image">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h3>Bill Image</h3>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="images/icons/close.svg" aria-label="Close"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <img ng-src="{{imgUrl}}" class="showImg" />
+    </md-dialog-content>
+  </md-dialog>
+</script>

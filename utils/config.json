@@ -1,0 +1,5 @@
+{
+    "secret": "you-will-never-guess",
+	"database": "mongodb://localhost/nodejs-test",
+	"page": 5
+}

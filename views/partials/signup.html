@@ -1,0 +1,48 @@
+<div flex class="md-padding">
+  <div layout-margin class="inset" layout="row" layout-align="center center">
+    <md-card flex-gt-sm="40" flex-sm="90">
+      <md-card-header>
+        <md-card-header-text>
+          <span class="md-title">Sign Up</span>
+        </md-card-header-text>
+      </md-card-header>
+      <md-progress-linear md-mode="indeterminate" ng-show="showLoading"></md-progress-linear>
+      <md-divider></md-divider>
+      <form name="signUpForm" ng-submit="signUp()" novalidate>
+        <md-card-content layout="column" flex>
+          <div layout="column" flex>
+            <md-input-container>
+              <label>Email</label>
+              <input type="email" ng-model="user.email" name="email" minlength="5" maxlength="100" ng-pattern="/^.+@.+\..+$/" email-unique="email" required>
+              <div ng-messages="!signUpForm.email.$pristine && signUpForm.email.$error" role="alert">
+                <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                  Your email must be between 5 and 100 characters long and look like an e-mail address.
+                </div>
+                <div ng-message="unique">This email is taken, try another one.</div>
+              </div>
+            </md-input-container>
+            <md-input-container>
+              <label>Password</label>
+              <input type="password" ng-model="user.password" name="password" password-match="user.confirmPassword" required>
+              <div ng-messages="signUpForm.password.$dirty && signUpForm.password.$error">
+                <div ng-message="required">This is required.</div>
+                <div ng-message="match">Password is not match</div>
+              </div>
+            </md-input-container>
+            <md-input-container>
+              <label>Confirm Password</label>
+              <input type="password" ng-model="user.confirmPassword" name="confirmPassword" password-match="user.password" required>
+              <div ng-messages="signUpForm.confirmPassword.$dirty && signUpForm.confirmPassword.$error">
+                <div ng-message="required">This is required.</div>
+                <div ng-message="match">Password is not match</div>
+              </div>
+            </md-input-container>
+          </div>
+        </md-card-content>
+        <md-card-actions layout="column" layout-align="start">
+          <md-button type="submit" class="md-raised md-primary" ng-disabled="signUpForm.$invalid || disabled">Sign Up</md-button>
+        </md-card-actions>
+      </form>
+    </md-card>
+  </div>
+</div>

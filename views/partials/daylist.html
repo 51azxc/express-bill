@@ -1,0 +1,77 @@
+<div layout="column">
+  <md-content flex>
+    <div layout="row" layout-sm="column" layout-align="space-around center" flex ng-hide="loaded">
+      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+    <section layout="row" layout-sm="column" layout-align="center center" flex>
+      <div layout="row" layout-align="end center" flex="66">
+        <md-datepicker ng-model="startDate" md-placeholder="Enter start date" md-max-date="today"></md-datepicker>
+        <md-datepicker ng-model="endDate" md-placeholder="Enter end date" md-max-date="today"></md-datepicker>
+      </div>
+      <div layout="row" layout-align="end center" layout-align-sm="start center" flex="33">
+        <md-fab-speed-dial class="md-fling" md-open="isOpen" md-direction="left" ng-mouseenter="isOpen=true" ng-mouseleave="isOpen=false">
+          <md-fab-trigger>
+            <md-button class="md-fab md-warn" aria-label="menu">
+              <md-tooltip md-direction="top">menu</md-tooltip>
+              <md-icon md-svg-src="images/icons/menu.svg"></md-icon>
+            </md-button>
+          </md-fab-trigger>
+          <md-fab-actions>
+            <md-button class="md-fab md-raised md-mini" aria-label="add" ng-href="/createBill">
+              <md-tooltip md-direction="top">add a bill</md-tooltip>
+              <md-icon md-svg-src="images/icons/plus.svg" aria-label="add" style="color: #0f0;"></md-icon>
+            </md-button>
+            <md-button class="md-fab md-raised md-mini" aria-label="reset" ng-click="reset()">
+              <md-tooltip md-direction="top">reset</md-tooltip>
+              <md-icon md-svg-src="images/icons/refresh.svg" aria-label="reset" style="color: #f00;"></md-icon>
+            </md-button>
+            <md-button class="md-fab md-raised md-mini" aria-label="search" ng-click="search()">
+              <md-tooltip md-direction="top">search</md-tooltip>
+              <md-icon md-svg-src="images/icons/magnify.svg" aria-label="search" style="color: #00f;"></md-icon>
+            </md-button>
+            <md-button class="md-fab md-raised md-mini" aria-label="export" ng-click="exportData()">
+              <md-tooltip md-direction="top">export</md-tooltip>
+              <md-icon md-svg-src="images/icons/file-export.svg" aria-label="search" style="color: #0ff;"></md-icon>
+            </md-button>
+          </md-fab-actions>
+        </md-fab-speed-dial>
+      </div>
+    </section>
+    <section layout="row" ng-if="costDetail.length==0">
+      <md-toolbar class="md-warn">
+        <div class="md-toolbar-tools">
+          <h3 class="md-flex">Nothing</h3>
+        </div>
+      </md-toolbar>
+    </section>
+    <md-list ng-if="costDetail.length">
+      <div ng-repeat="costs in costDetail">
+        <md-divider></md-divider>
+        <md-subheader class="md-primary">{{ costs.date }} 消费: {{ costs.summary | currency:'￥' }}</md-subheader>
+        <md-divider></md-divider>
+        <md-list-item class="md-3-line" ng-repeat="bill in costs.desc" ng-click="editBill(bill.id)">
+          <md-icon md-svg-icon="images/icons/hanger.svg" ng-if="bill.tag == 1"></md-icon>
+          <md-icon md-svg-icon="images/icons/food.svg" ng-if="bill.tag == 2"></md-icon>
+          <md-icon md-svg-icon="images/icons/hotel.svg" ng-if="bill.tag == 3"></md-icon>
+          <md-icon md-svg-icon="images/icons/bus.svg" ng-if="bill.tag == 4"></md-icon>
+          <md-icon md-svg-icon="images/icons/cart.svg" ng-if="bill.tag == 5"></md-icon>
+          <div class="md-list-item-text" layout="column">
+            <h3>{{ bill.name }}</h3>
+            <h4>{{ bill.price | currency:'￥' }}</h4>
+            <p>{{ bill.detail }}</p>
+          </div>
+          <md-icon md-svg-icon="images/icons/pencil.svg" class="md-secondary md-hue-3"></md-icon>
+        </md-list-item>
+      </div>
+    </md-list>
+    <div layout="row" layout-align="center center" flex ng-if="costDetail.length">
+      <md-button class="md-icon-button" aria-label="prev" ng-disabled="!hasPrev" ng-click="prev()">
+        <md-icon md-svg-icon="images/icons/arrow-left.svg" aria-label="prev"></md-icon>
+      </md-button>
+      {{ pageNum + 1 }} / {{ pageSize }}
+      <md-button class="md-icon-button" aria-label="next" ng-disabled="!hasNext" ng-click="next()">
+        <md-icon md-svg-icon="images/icons/arrow-right.svg" aria-label="next"></md-icon>
+      </md-button>
+    </div>
+  </md-content>
+</div>

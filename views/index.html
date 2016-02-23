@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <base href="/" />
+    <meta charset="utf-8" />
+	  <title>my bill</title>
+	  <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
+	  <link rel="stylesheet" href="/bower_components/angular-chart.js/dist/angular-chart.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+  </head>
+  <body layout="row" ng-controller="AppCtrl" ng-cloak>
+    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" ng-show="isSignIn">
+      <md-toolbar class="md-tall md-hue-2">
+        
+        <div layout="column" class="md-toolbar-tools-bottom inset" layout-align="center center">
+          <img ng-src="{{ userAvatar }}" class="md-avatar" />
+          <div>{{userNickname}}</div>
+        </div>
+      </md-toolbar>
+      <md-list>
+        <md-subheader class="md-no-sticky">BILL</md-subheader>
+        <md-list-item ng-click="billList()">
+          <md-icon md-svg-src="images/icons/calendar-text.svg"></md-icon>
+          <p class="md-list-item-text">Bill List</p>
+        </md-list-item>
+        <md-list-item ng-click="billChart()">
+          <md-icon md-svg-src="images/icons/chart-line.svg"></md-icon>
+          <p class="md-list-item-text">Bill Chart</p>
+        </md-list-item>
+        <md-divider></md-divider>
+        <md-subheader class="md-no-sticky">USER</md-subheader>
+        <md-list-item ng-click="showMe()">
+          <md-icon md-svg-src="images/icons/account.svg"></md-icon>
+          <p class="md-list-item-text">User Info</p>
+        </md-list-item>
+        <md-list-item ng-click="signOut()">
+          <md-icon md-svg-src="images/icons/exit-to-app.svg"></md-icon>
+          <p class="md-list-item-text">Sign Out</p>
+        </md-list-item>
+      </md-list>
+    </md-sidenav>
+
+    <div layout="column" layout-fill>
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <md-button class="md-icon-button" ng-click="toggleSidenav('left')" hide-gt-md aria-label="Menu" ng-show="isSignIn">
+            <md-icon md-svg-src="images/icons/menu.svg"></md-icon>
+          </md-button>
+          <span flex></span>
+          <div layout="row" flex="33" flex-offset="66">
+            <md-button flex ng-href="/signIn" ng-hide="isSignIn">Sign In</md-button>
+            <md-button flex ng-href="/signUp" ng-hide="isSignIn">Sign Up</md-button>
+          </div>
+        </div>
+      </md-toolbar>
+      
+      <md-content flex>
+        <div ng-view></div>
+      </md-content>
+    </div>
+    <!--
+    <md-toolbar layout="row">
+      <div class="md-toolbar-tools">
+        <md-button ng-click="toggleSidenav('left')" hide-gt-sm class="md-icon-button" ng-show="isSignIn">
+          <span class="visually-hidden">Menu</span>
+        </md-button>
+        <h1 class="md-toolbar-tools" layout-align-gt-sm="center">Hello World</h1>
+      </div>
+    </md-toolbar>
+    <div layout="row" flex>
+      <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" ng-show="isSignIn">
+      </md-sidenav>
+      <div layout="column" flex id="content"layout-align-sm="start start" layout-align-gt-sm="center center">
+        <md-content layout="column" flex class="md-padding">
+          <md-subheader class="md-primary">
+            <div layout="row" layout-center="center" layout-sm="column">
+              <md-button flex="50" class="md-raised md-primary">Sign In</md-button>
+              <md-button flex="50" class="md-raised md-primary">Sign Up</md-button>
+            </div>
+          </md-subheader>
+          <div ng-view></div>
+        </md-content>
+      </div>
+    </div>
+    -->
+<!--	<script src="/bower_components/requirejs/require.js" data-main="/javascripts/require-style/main.js"></script>  -->
+	<script src="/bower_components/angular/angular.js"></script>
+	<script src="/bower_components/angular-animate/angular-animate.js"></script>
+	<script src="/bower_components/angular-aria/angular-aria.js"></script>
+	<script src="/bower_components/angular-material/angular-material.js"></script>
+  <script src="/bower_components/angular-route/angular-route.js"></script>
+  <script src="/bower_components/angular-messages/angular-messages.js"></script>
+  <script src="/bower_components/ng-file-upload/ng-file-upload-all.js"></script>
+  <script src="/bower_components/Chart.js/Chart.js"></script>
+  <script src="/bower_components/angular-chart.js/dist/angular-chart.js"></script>
+	<script src="/javascripts/main.js"></script>
+	<script src="/javascripts/controller.js"></script>
+  <script src="/javascripts/service.js"></script>
+  <script src="/javascripts/directive.js"></script>
+  </body>
+</html>

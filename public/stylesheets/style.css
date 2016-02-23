@@ -1,0 +1,53 @@
+/*
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+*/
+a {
+  color: #00B7FF;
+}
+
+.drop-box {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    text-align: center;
+    padding: 25px;
+    margin: 10px;
+}
+.dragover {
+  border: 5px dashed blue;
+}
+.md-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  box-sizing: content-box;
+}
+
+
+/* md-datepicker {
+  margin-top: 18px; } */
+.md-datepicker-button {
+  height: 36px;
+  width: 36px;
+  line-height: 36px; 
+}
+.md-datepicker-input-container {
+  margin-left: -12px; 
+}
+.md-switch-padding {
+  padding-top: 25px;
+}
+.img {
+  max-width: 100px;
+  max-height: 100px;
+  min-width: 50px;
+  min-height: 50px;
+}
+.showImg {
+  max-width: 600px;
+  max-height: 600px;
+  min-width: 250px;
+  min-height: 250px;
+}

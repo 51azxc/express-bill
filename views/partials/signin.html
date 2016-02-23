@@ -1,0 +1,46 @@
+<div flex class="md-padding">
+  <div layout="row" layout-margin class="inset" layout-align="center center">
+    <md-card flex-gt-sm="40" flex-sm="90">
+      <form name="signInForm" ng-submit="signIn()" novalidate>
+        <md-card-header>
+          <md-card-header-text>
+            <span class="md-title">Sign In</span>
+          </md-card-header-text>
+        </md-card-header>
+        <md-progress-linear md-mode="indeterminate" ng-show="showLoading"></md-progress-linear>
+        <md-divider></md-divider>
+        <md-card-title ng-show="error">
+          <md-toolbar class="md-warn md-mini" ng-show="error">
+            <div class="md-toolbar-tools">
+              <h5 class="md-flex">{{ errorMessage }}</h5>
+            </div>
+          </md-toolbar>
+        </md-card-title>
+        <md-card-content>
+          <div layout="column" flex>
+            <md-input-container></md-input-container>
+            <md-input-container md-no-float>
+              <md-icon md-svg-src="images/icons/email.svg" stlye="color: blue;"></md-icon>
+              <input type="email" ng-model="user.email" name="email" placeholder="Email" ng-pattern="/^.+@.+\..+$/" required>
+              <div ng-messages="!signInForm.email.$pristine && signInForm.email.$error" role="alert">
+                <div ng-message-exp="['required', 'pattern']">
+                  Your email must be look like an e-mail address.
+                </div>
+              </div>
+            </md-input-container>
+            <md-input-container md-no-float>
+              <md-icon md-svg-src="images/icons/key-variant.svg" stlye="color: #01579B;"></md-icon>
+              <input type="password" ng-model="user.password" name="password" placeholder="Password" required>
+              <div ng-messages="signInForm.password.$dirty && signInForm.password.$error">
+                <div ng-message="required">This is required.</div>
+              </div>
+            </md-input-container>
+          </div>
+        </md-card-content>
+        <md-card-actions layout="column" layout-align="start">
+          <md-button type="submit" class="md-raised md-primary" ng-disabled="signInForm.$invalid || disabled">Sign In</md-button>
+        </md-card-actions>
+      </form>
+    </md-card>
+  </div>
+</div>
